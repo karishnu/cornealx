@@ -70,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
         imageViewHist1.setImageBitmap(drawRects(bitmap1));
     }
 
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageView1.setImageBitmap(photo);
+            genHeatMap(photo);
+        }
+    }
+
     public static Bitmap createContrast(Bitmap src, double value) {
         // image size
         int width = src.getWidth();
@@ -147,16 +156,6 @@ public class MainActivity extends AppCompatActivity {
 
         Utils.matToBitmap(mat, bitmap);
         return bitmap;
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            imageView1.setImageBitmap(photo);
-            genHeatMap(photo);
-
-        }
     }
 
 
