@@ -50,19 +50,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         System.loadLibrary("opencv_java3");
 
-
         imageView1 = (ImageView) findViewById(R.id.iv1);
         imageViewHist1 = (ImageView) findViewById(R.id.ivhist1);
         Button photoButton = (Button) this.findViewById(R.id.button);
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+/*                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
+
+                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                startActivity(intent);
             }
         });
 
-        String path1 = Environment.getExternalStorageDirectory() + "/camtech/camtech6.jpg";
+        String path1 = Environment.getExternalStorageDirectory() + "/camtech/camtech8.jpg";
         Bitmap bitmap1 = BitmapFactory.decodeFile(path1);
         imageView1.setImageBitmap(createContrast(bitmap1, 50));
         imageViewHist1.setImageBitmap(drawRects(bitmap1));
